@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Messenger</string>
+    <string name="register_username">Username</string>
+    <string name="register_email">E Mail</string>
+    <string name="register_password">Password</string>
+    <string name="register_register">REGISTER</string>
+    <string name="register_signin">Already Have Account? Signin</string>
 </resources>
