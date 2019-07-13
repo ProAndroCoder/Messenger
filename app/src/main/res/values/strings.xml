@@ -5,4 +5,7 @@
     <string name="register_password">Password</string>
     <string name="register_register">REGISTER</string>
     <string name="register_signin">Already Have Account? Signin</string>
+    <string name="login_login">LOGIN</string>
+    <string name="login_signup">Create An Account</string>
+    <string name="register_select_photo">SELECT PHOTO</string>
 </resources>
