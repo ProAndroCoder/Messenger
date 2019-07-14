@@ -1,4 +1,4 @@
-package com.example.messenger
+package com.example.messenger.registerlogin
 
 import android.app.Activity
 import android.content.Intent
@@ -8,6 +8,9 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
+import com.example.messenger.R
+import com.example.messenger.models.User
+import com.example.messenger.messages.LatestMessagesActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
@@ -74,16 +77,16 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener {
-                    if (!it.isSuccessful) return@addOnCompleteListener
+            .addOnCompleteListener {
+                if (!it.isSuccessful) return@addOnCompleteListener
 
-                    Log.d("RegisterActivity", "User is Created UID : ${it.result?.user?.uid}")
+                Log.d("RegisterActivity", "User is Created UID : ${it.result?.user?.uid}")
 
-                    UploadProfileImage()
-                }
-                .addOnFailureListener {
-                    Log.d("RegisterActivity", "Failed to Create User : ${it.message}")
-                }
+                UploadProfileImage()
+            }
+            .addOnFailureListener {
+                Log.d("RegisterActivity", "Failed to Create User : ${it.message}")
+            }
     }
 
     //Firebase e resim upload eden metod
@@ -97,19 +100,19 @@ class RegisterActivity : AppCompatActivity() {
         val ref = FirebaseStorage.getInstance().getReference().child("UserProfileImage/$filename")
 
         ref.putFile(selectedPhotoUri!!)
-                .addOnSuccessListener {
-                    Log.d("RegisterActivity", "Image Successfully Uploaded : ${it.metadata?.path}")
+            .addOnSuccessListener {
+                Log.d("RegisterActivity", "Image Successfully Uploaded : ${it.metadata?.path}")
 
-                    //Dosyanın konumunu getirir
-                    ref.downloadUrl.addOnSuccessListener {
-                        Log.d("RegisterActivity", "File Location : $it")
+                //Dosyanın konumunu getirir
+                ref.downloadUrl.addOnSuccessListener {
+                    Log.d("RegisterActivity", "File Location : $it")
 
-                        saveUserToDatabase(it.toString())
-                    }
+                    saveUserToDatabase(it.toString())
                 }
-                .addOnFailureListener {
-                    Log.d("RegisterActivity", "There is An Error While Uploading Image : ${it.message}")
-                }
+            }
+            .addOnFailureListener {
+                Log.d("RegisterActivity", "There is An Error While Uploading Image : ${it.message}")
+            }
     }
 
     private fun saveUserToDatabase(profileImageUrl: String) {
@@ -120,6 +123,11 @@ class RegisterActivity : AppCompatActivity() {
 
         ref.setValue(user).addOnSuccessListener {
             Log.d("RegisterActivity", "User is Saved To Firebase Database")
+
+            val intent = Intent(this, LatestMessagesActivity::class.java)
+
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
         }
     }
 }

@@ -8,23 +8,23 @@
     android:gravity="center"
     android:orientation="vertical"
     android:padding="70dp"
-    tools:context=".LoginActivity">
+    tools:context=".registerlogin.LoginActivity">
 
     <EditText
-        android:id="@+id/et_Username"
+        android:id="@+id/et_login_Email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_edittext"
-        android:hint="@string/register_username"
+        android:hint="@string/register_email"
         android:padding="6dp" />
 
     <EditText
-        android:id="@+id/et_Email"
+        android:id="@+id/et_login_Password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:background="@drawable/rounded_edittext"
-        android:hint="@string/register_email"
+        android:hint="@string/register_password"
         android:padding="6dp" />
 
     <Button
@@ -32,8 +32,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:padding="5dp"
         android:background="@drawable/round_button"
+        android:padding="5dp"
         android:text="@string/login_login" />
 
     <TextView
