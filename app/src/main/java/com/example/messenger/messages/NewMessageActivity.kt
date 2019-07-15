@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import com.example.messenger.R
 import com.example.messenger.models.User
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -29,6 +30,11 @@ class NewMessageActivity : AppCompatActivity() {
         fetchUsers()
     }
 
+    //Companian Object sayesinde burada tanımlanan değerler diğer activityler tarafından da okunabilir
+    companion object {
+        val USER_KEY = "USER_KEY"
+    }
+
     //Firebase Veritabanımızdan bilgileri çekme işlemini yapan metod
     private fun fetchUsers() {
         val ref = FirebaseDatabase.getInstance().getReference("/users")
@@ -40,13 +46,18 @@ class NewMessageActivity : AppCompatActivity() {
                     Log.d(TAG, "User Info : ${it.toString()}")
                     val user = it.getValue(User::class.java)
 
-                    if (user != null) {
+                    if (user != null && user.uid != FirebaseAuth.getInstance().uid) {
                         adapter.add(UserItem(user))
                     }
                 }
 
+                //Buradaki bilgileri diğer activity e gönderme işlemi
                 adapter.setOnItemClickListener { item, view ->
-                    startActivity(Intent(view.context, ChatLogActivity::class.java))
+                    val userItem = item as UserItem
+                    val intent = Intent(view.context, ChatLogActivity::class.java)
+                    //Başka activitye nesne gönderme Parcelable
+                    intent.putExtra(USER_KEY, userItem.user)
+                    startActivity(intent)
                     finish()
                 }
 
@@ -58,8 +69,6 @@ class NewMessageActivity : AppCompatActivity() {
             }
         })
     }
-
-
 }
 
 class UserItem(val user: User) : Item<ViewHolder>() {

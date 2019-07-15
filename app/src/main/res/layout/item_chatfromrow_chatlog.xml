@@ -7,20 +7,18 @@
     android:orientation="horizontal"
     android:padding="5dp">
 
-
     <TextView
-        android:id="@+id/txt_message_chatlog"
+        android:id="@+id/txt_message_from_chatlog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="@drawable/rounded_edittext"
         android:padding="10dp"
-        android:text="Hello From me"
         android:textColor="@android:color/black"
         android:textStyle="bold" />
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/circle_imageview_user_chatlog"
+        android:id="@+id/circle_imageview_user_from_chatlog"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginStart="10dp"

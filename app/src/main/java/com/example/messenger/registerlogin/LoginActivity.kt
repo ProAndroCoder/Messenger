@@ -15,7 +15,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        direct_login()
+        //direct_login()
 
         btn_login.setOnClickListener {
             perform_login()
@@ -45,7 +45,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun direct_login() {
-        FirebaseAuth.getInstance().signInWithEmailAndPassword("michael@gmail.com", "123456")
+        FirebaseAuth.getInstance().signInWithEmailAndPassword("moro@gmail.com", "123456")
                 .addOnCompleteListener {
                     if (!it.isSuccessful) return@addOnCompleteListener
 
