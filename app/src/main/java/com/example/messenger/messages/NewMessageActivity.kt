@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import com.example.messenger.R
 import com.example.messenger.models.User
+import com.example.messenger.views.UserItem
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -71,13 +72,3 @@ class NewMessageActivity : AppCompatActivity() {
     }
 }
 
-class UserItem(val user: User) : Item<ViewHolder>() {
-    override fun bind(viewHolder: ViewHolder, position: Int) {
-        viewHolder.itemView.username_new_message.text = user.username
-        Picasso.get().load(user.profileImageUrl).into(viewHolder.itemView.circle_imageview_user)
-    }
-
-    override fun getLayout(): Int {
-        return R.layout.item_user_new_message
-    }
-}
